@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="calcApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
+    <script>
+        var calcApp = angular.module('calcApp', []);
+        calcApp.controller('calcCtrl', function($scope) {
+            $scope.cost = 0;
+            $scope.$watch('cost', updateView);
+            $scope.$watch('incl_tax', updateView);
+            function updateView() {
+                $scope.tax = $scope.incl_tax ? $scope.cost * 0.23 : 0;
+                $scope.total = parseFloat($scope.cost) + $scope.tax;
+            }
+        });
+    </script>
+</head>
+<body class="panel-body" ng-controller="calcCtrl">
+    <div class="form-group">
+        <label>Cost net</label>
+        <input type="text" ng-model="cost" class="form-control">
+    </div>
+    <div class="form-group">
+       <div class="checkbox">
+           <label>
+               <input type="checkbox" ng-model="incl_tax"> include tax
+           </label>
+       </div>
+    </div>
+    <div class="form-group" ng-show="incl_tax">
+        <label>Tax</label>
+        <output class="form-control" readonly>{{tax|number:2}} PLN</output>
+    </div>
+    <div class="form-group">
+        <label>Total</label>
+        <output class="form-control" readonly>{{total|number:2}} PLN</output>
+    </div>
+</body>
+</html>
