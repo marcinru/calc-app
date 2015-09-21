@@ -8,12 +8,23 @@
     <script>
         var calcApp = angular.module('calcApp', []);
         calcApp.controller('calcCtrl', function($scope) {
+            $scope.shipping_options = [
+                { name: 'Flat Rate', price: 10 },
+                { name: 'Express', price: 20 },
+                { name: 'Super Express', price: 30 }
+            ];
+            
             $scope.cost = 0;
+            $scope.incl_tax = true;
+            $scope.shipping = $scope.shipping_options[0];
+            
             $scope.$watch('cost', updateView);
             $scope.$watch('incl_tax', updateView);
+            $scope.$watch('shipping', updateView);
+            
             function updateView() {
                 $scope.tax = $scope.incl_tax ? $scope.cost * 0.23 : 0;
-                $scope.total = parseFloat($scope.cost) + $scope.tax;
+                $scope.total = parseFloat($scope.cost) + $scope.tax + $scope.shipping.price;
             }
         });
     </script>
@@ -22,6 +33,10 @@
     <div class="form-group">
         <label>Cost net</label>
         <input type="text" ng-model="cost" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Shipping</label>
+        <select class="form-control" ng-model="shipping" ng-options="s.name for s in shipping_options"></select> 
     </div>
     <div class="form-group">
        <div class="checkbox">
