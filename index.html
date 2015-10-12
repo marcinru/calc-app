@@ -1,53 +1,46 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="calcApp">
+<html ng-app="calcApp">
 <head>
-    <meta charset="UTF-8">
-    <title>Calculator</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
     <script>
-        var calcApp = angular.module('calcApp', []);
-        calcApp.controller('calcCtrl', function($scope) {
+    angular.module('calcApp', [])
+        .controller('calcCtrl', function($scope) {
             $scope.shipping_options = [
-                { name: 'Flat Rate', price: 10 },
-                { name: 'Express', price: 20 },
-                { name: 'Super Express', price: 30 }
+                { name: 'Flat Rate', cost: 10 },
+                { name: 'Express', cost: 20 },
+                { name: 'Super Express', cost: 30 }
             ];
-            
-            $scope.cost = 0;
+            $scope.price = 0;
             $scope.incl_tax = true;
             $scope.shipping = $scope.shipping_options[0];
-            
-            $scope.$watch('cost', updateView);
+            $scope.$watch('price', updateView);
             $scope.$watch('incl_tax', updateView);
             $scope.$watch('shipping', updateView);
-            
             function updateView() {
-                $scope.tax = $scope.incl_tax ? $scope.cost * 0.23 : 0;
-                $scope.total = parseFloat($scope.cost) + $scope.tax + $scope.shipping.price;
+                $scope.tax = $scope.incl_tax ? $scope.price * 0.23 : 0;
+                $scope.total = parseFloat($scope.price) + $scope.tax + $scope.shipping.cost;
             }
         });
     </script>
 </head>
 <body class="panel-body" ng-controller="calcCtrl">
     <div class="form-group">
-        <label>Cost net</label>
-        <input type="text" ng-model="cost" class="form-control">
+        <label>Price net</label>
+        <input type="text" ng-model="price" class="form-control">
     </div>
-    <div class="form-group">
-        <label>Shipping</label>
-        <select class="form-control" ng-model="shipping" ng-options="s.name for s in shipping_options"></select> 
-    </div>
-    <div class="form-group">
-       <div class="checkbox">
-           <label>
-               <input type="checkbox" ng-model="incl_tax"> include tax
-           </label>
-       </div>
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" ng-model="incl_tax"> include tax
+        </label>
     </div>
     <div class="form-group" ng-show="incl_tax">
         <label>Tax</label>
         <output class="form-control" readonly>{{tax|number:2}} PLN</output>
+    </div>
+    <div class="form-group">
+        <label>Shipping</label>
+        <select class="form-control" ng-model="shipping" ng-options="s.name for s in shipping_options"></select>
     </div>
     <div class="form-group">
         <label>Total</label>
