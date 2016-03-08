@@ -12,7 +12,7 @@ angular.module('calcApp', []).controller('calcCtrl', function($scope) {
 	$scope.$watch('cart.incl_tax', updateView);
 	$scope.$watch('cart.shipping', updateView);
 	function updateView() {
-		cart.tax = cart.incl_tax ? cart.price * 0.23 : 0;
+		cart.tax = cart.incl_tax ? cart.price * 0.25 : 0;
 		cart.total = parseFloat(cart.price) + cart.tax + cart.shipping.cost;
 	}
 });

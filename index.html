@@ -1,31 +1,38 @@
 <!DOCTYPE html>
 <html ng-app="calcApp">
 <head>
-    <title>Simple shopping cart front-end created to learn</title>
+    <title>Calc app</title>
     <link rel="stylesheet" href="vendor/css/bootstrap.css">
 </head>
-<body class="panel-body" ng-controller="calcCtrl as cart">
-    <div class="form-group">
-        <label>Price net</label>
-        <input type="text" ng-model="cart.price" class="form-control">
-    </div>
-    <div class="checkbox">
-        <label>
-            <input type="checkbox" ng-model="cart.incl_tax"> include tax
-        </label>
-    </div>
-    <div class="form-group" ng-show="cart.incl_tax">
-        <label>Tax</label>
-        <output class="form-control" readonly>{{cart.tax|number:2}} PLN</output>
-    </div>
-    <div class="form-group">
-        <label>Shipping</label>
-        <select class="form-control" ng-model="cart.shipping" ng-options="s.name for s in cart.shipping_options"></select>
-    </div>
-    <div class="form-group">
-        <label>Total</label>
-        <output class="form-control" readonly>{{cart.total|number:2}} PLN</output>
-    </div>
+<body class="container">
+    <h2 class="text-info">
+        <i class="glyphicon glyphicon-shopping-cart"></i>
+        Shopping cart
+    </h2>
+    <hr>
+    <form ng-controller="calcCtrl as cart">
+        <div class="form-group">
+            <label>Base price</label>
+            <input type="text" ng-model="cart.price" class="form-control">
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="cart.incl_tax"> include tax
+            </label>
+        </div>
+        <div class="form-group" ng-show="cart.incl_tax">
+            <label>Tax</label>
+            <output class="form-control" readonly>{{cart.tax|number:2}} SEK</output>
+        </div>
+        <div class="form-group">
+            <label>Shipping</label>
+            <select class="form-control" ng-model="cart.shipping" ng-options="s.name for s in cart.shipping_options"></select>
+        </div>
+        <div class="form-group">
+            <label>Total cost</label>
+            <output class="form-control" readonly>{{cart.total|number:2}} SEK</output>
+        </div>
+    </form>
     <script src="vendor/js/angular.min.js"></script>
     <script src="calc.ctrl.js"></script>
 </body>
