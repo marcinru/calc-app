@@ -1,0 +1,12 @@
+{
+  "name": "calc-app",
+  "version": "0.0.1",
+  "devDependencies": {
+    "angular": "^1.5.1",
+    "bootstrap": "^3.3.6",
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-jasmine": "^0.3.7"
+  }
+}
