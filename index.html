@@ -26,7 +26,8 @@
         </div>
         <div class="form-group">
             <label>Shipping</label>
-            <select class="form-control" ng-model="cart.shipping" ng-options="s.name for s in cart.shippingOptions"></select>
+            <select class="form-control" ng-model="cart.shipping"
+                    ng-options="option.name for option in cart.shippingOptions"></select>
         </div>
         <div class="form-group">
             <label>Total cost</label>
